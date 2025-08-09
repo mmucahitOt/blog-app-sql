@@ -1,0 +1,27 @@
+name: blog_app_postgres
+
+services:
+  postgres:
+    image: blog_app_postgres
+    build: .
+    container_name: blog_app_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-blog_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-blog_password}
+      POSTGRES_DB: ${POSTGRES_DB:-blog_db}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - blog_app_network
+    env_file:
+      - ../.env
+
+volumes:
+  postgres_data:
+
+networks:
+  blog_app_network:
+    driver: bridge

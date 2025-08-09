@@ -1,0 +1,20 @@
+{
+  "name": "blog-app-backend",
+  "version": "1.0.0",
+  "description": "A simple blog app backend",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "db:up": "bash scripts/db_up.bash",
+    "db:down": "bash scripts/db_down.bash"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "pg": "^8.16.3",
+    "sequelize": "^6.37.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
