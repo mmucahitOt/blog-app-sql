@@ -24,10 +24,6 @@ const createBlog = async ({ author, title, url, likes }) => {
 const updateBlog = async ({ id, author, title, url, likes }) => {
   const blog = await Blog.findByPk(id);
 
-  if (!blog) {
-    throw new Error("Blog not found");
-  }
-
   if (author) {
     blog.author = author;
   }
@@ -46,10 +42,6 @@ const updateBlog = async ({ id, author, title, url, likes }) => {
 
 const deleteBlog = async (id) => {
   const blog = await Blog.findByPk(id);
-
-  if (!blog) {
-    throw new Error("Blog not found");
-  }
 
   await blog.destroy();
   return true;

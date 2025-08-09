@@ -8,6 +8,7 @@ const {
   deleteBlog,
 } = require("./services/blogService.js");
 const { requestLogger } = require("./utils/logger.js");
+const errorHandler = require("./middlewares/errorHandler.js");
 
 dotenv.config();
 
@@ -45,5 +46,7 @@ app.delete("/api/blogs/:id", async (req, res) => {
   await deleteBlog(id);
   res.json("Blog deleted successfully");
 });
+
+app.use(errorHandler);
 
 module.exports = app;

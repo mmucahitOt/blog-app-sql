@@ -1,4 +1,5 @@
-GET http://localhost:3001/api/blogs/3
+
+GET http://localhost:3001/api/blogs/5
 
 
 ###
@@ -19,15 +20,15 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3001/api/blogs/3
+PUT http://localhost:3001/api/blogs/5
 Content-Type: application/json
 
 {
   "author": "John Doe2",
   "title": "Blog Title2",
   "url": "https://www.example2.com",
-  "likes": 10000
+  "likes": 9999
 }
 
 ###
-DELETE http://localhost:3001/api/blogs/4
+DELETE http://localhost:3001/api/blogs/5
