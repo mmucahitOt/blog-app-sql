@@ -21,21 +21,10 @@ const createBlog = async ({ author, title, url, likes }) => {
   return blog;
 };
 
-const updateBlog = async ({ id, author, title, url, likes }) => {
+const updateBlog = async (id, updateBlogData) => {
   const blog = await Blog.findByPk(id);
 
-  if (author) {
-    blog.author = author;
-  }
-  if (title) {
-    blog.title = title;
-  }
-  if (url) {
-    blog.url = url;
-  }
-  if (likes !== undefined) {
-    blog.likes = likes;
-  }
+  Object.assign(blog, updateBlogData);
   await blog.save();
   return blog;
 };

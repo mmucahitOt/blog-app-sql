@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require("sequelize");
-const { sequelize } = require("../utils/db_connection.js");
+const { sequelize } = require("../utils/db.js");
 
 class Blog extends Model {}
 Blog.init(
@@ -33,8 +33,5 @@ Blog.init(
     modelName: "blog",
   }
 );
-
-// Ensure the table exists before usage
-Blog.sync();
 
 module.exports = Blog;
