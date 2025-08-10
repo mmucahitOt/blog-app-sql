@@ -5,8 +5,8 @@ const getBlogs = async () => {
   const blogs = await blogService.getAllBlogs();
   if (!blogs) {
     throw new RequestErrorBuilder()
-      .withMessage("No blogs found")
-      .withCode(404)
+      .addMessage("No blogs found")
+      .setCode(404)
       .build();
   }
   return blogs;
@@ -16,8 +16,8 @@ const createBlog = async (blog) => {
   const newBlog = await blogService.createBlog(blog);
   if (!newBlog) {
     throw new RequestErrorBuilder()
-      .withMessage("Failed to create blog")
-      .withCode(400)
+      .addMessage("Failed to create blog")
+      .setCode(400)
       .build();
   }
   return newBlog;
@@ -33,8 +33,8 @@ const updateBlog = async ({ id, author, title, url, likes }) => {
   const updatedBlog = await blogService.updateBlog(id, updateBlogData);
   if (!updatedBlog) {
     throw new RequestErrorBuilder()
-      .withMessage("Failed to update blog")
-      .withCode(400)
+      .addMessage("Failed to update blog")
+      .setCode(400)
       .build();
   }
   return updatedBlog;
@@ -44,8 +44,8 @@ const deleteBlog = async (id) => {
   const deletedBlog = await blogService.deleteBlog(id);
   if (!deletedBlog) {
     throw new RequestErrorBuilder()
-      .withMessage("Failed to delete blog")
-      .withCode(400)
+      .addMessage("Failed to delete blog")
+      .setCode(400)
       .build();
   }
   return deletedBlog;

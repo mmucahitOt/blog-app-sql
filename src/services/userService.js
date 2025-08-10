@@ -5,6 +5,11 @@ const getUserById = async (id) => {
   return user;
 };
 
+const getUserByUsername = async (username) => {
+  const user = await User.findOne({ where: { username } });
+  return user;
+};
+
 const getAllUsers = async () => {
   const users = await User.findAll();
   return users;
@@ -19,9 +24,8 @@ const createUser = async ({ username, name }) => {
   return user;
 };
 
-const updateUser = async ({ id, updateUserData }) => {
-  const user = await User.findByPk(id);
-  console.log("Updated user:", user);
+const updateUserByUsername = async ({ username, updateUserData }) => {
+  const user = await User.findOne({ where: { username } });
   Object.assign(user, updateUserData);
   await user.save();
   return user;
@@ -38,6 +42,7 @@ module.exports = {
   getAllUsers,
   createUser,
   getUserById,
-  updateUser,
+  getUserByUsername,
+  updateUser: updateUserByUsername,
   deleteUser,
 };

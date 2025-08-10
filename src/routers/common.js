@@ -6,8 +6,8 @@ const findBlogByIdMiddleware = async (req, res, next) => {
   if (!blog) {
     return next(
       new RequestErrorBuilder()
-        .withMessage("Blog not found")
-        .withCode(404)
+        .addMessage("Blog not found")
+        .setCode(404)
         .build()
     );
   }
@@ -20,8 +20,8 @@ const findUserByIdMiddleware = async (req, res, next) => {
   if (!user) {
     return next(
       new RequestErrorBuilder()
-        .withMessage("User not found")
-        .withCode(404)
+        .addMessage("User not found")
+        .setCode(404)
         .build()
     );
   }
@@ -29,4 +29,22 @@ const findUserByIdMiddleware = async (req, res, next) => {
   next();
 };
 
-module.exports = { findBlogByIdMiddleware, findUserByIdMiddleware };
+const findUserByUsernameMiddleware = async (req, res, next) => {
+  const user = await userService.getUserByUsername(req.params.username);
+  if (!user) {
+    return next(
+      new RequestErrorBuilder()
+        .addMessage("User not found")
+        .setCode(404)
+        .build()
+    );
+  }
+  req.user = user;
+  next();
+};
+
+module.exports = {
+  findBlogByIdMiddleware,
+  findUserByIdMiddleware,
+  findUserByUsernameMiddleware,
+};

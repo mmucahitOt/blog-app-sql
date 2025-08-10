@@ -2,21 +2,20 @@ POST http://localhost:3001/api/users
 Content-Type: application/json
 
 {
-  "username": "test",
+  "username": "test@test.com",
   "name": "Test User"
 }
-
 ###
 GET http://localhost:3001/api/users
 
 ###
 
-PUT http://localhost:3001/api/users/1
+PUT http://localhost:3001/api/users/test@test.com
 Content-Type: application/json
 
 {
-  "username": "test3",
-  "name": "Test User3"
+  "newUsername": "test",
+  "name": "Test User5"
 }
 
 ###
