@@ -1,13 +1,23 @@
-const { Blog } = require("../../models");
+const { Blog, User } = require("../../models");
 
 const getBlogById = async (id) => {
-  const blog = await Blog.findByPk(id);
-  return blog;
+  const blog = await Blog.findByPk(id, {
+    include: {
+      model: User,
+      attributes: ["username", "name"],
+    },
+  });
+  return blog.toJSON();
 };
 
 const getAllBlogs = async () => {
-  const blogs = Blog.findAll();
-  return blogs;
+  const blogs = await Blog.findAll({
+    include: {
+      model: User,
+      attributes: ["username", "name"],
+    },
+  });
+  return blogs.map((blog) => blog.toJSON());
 };
 
 const createBlog = async ({
@@ -22,7 +32,7 @@ const createBlog = async ({
     likes: likes || 0, // Ensure likes is always a number, default to 0 if undefined/null
   });
   console.log("Created blog:", blog.toJSON());
-  return blog;
+  return blog.toJSON();
 };
 
 const updateBlog = async (id, updateBlogData) => {
@@ -30,7 +40,7 @@ const updateBlog = async (id, updateBlogData) => {
 
   Object.assign(blog, updateBlogData);
   await blog.save();
-  return blog;
+  return blog.toJSON();
 };
 
 const deleteBlog = async (id) => {

@@ -1,4 +1,4 @@
-const { User } = require("../../models");
+const { User, Blog } = require("../../models");
 
 const getUserById = async (id) => {
   const user = await User.findByPk(id);
@@ -11,7 +11,12 @@ const getUserByUsername = async (username) => {
 };
 
 const getAllUsers = async () => {
-  const users = await User.findAll();
+  const users = await User.findAll({
+    include: {
+      model: Blog,
+      attributes: ["id", "title", "url", "likes"],
+    },
+  });
   return users.map((user) => user.toJSON());
 };
 
