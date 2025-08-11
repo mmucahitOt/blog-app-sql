@@ -12,7 +12,6 @@ const getBlogById = async (id) => {
 };
 
 const getAllBlogs = async ({ search }) => {
-  console.log("search", search);
   const whereClause = {
     [Op.or]: [
       { title: { [Op.substring]: search } },
@@ -21,12 +20,15 @@ const getAllBlogs = async ({ search }) => {
     ],
   };
 
+  const orderClause = [["likes", "DESC"]];
+
   const blogs = await Blog.findAll({
     include: {
       model: User,
       attributes: ["username", "name"],
     },
     where: whereClause,
+    order: orderClause,
   });
   return blogs.map((blog) => blog.toJSON());
 };
