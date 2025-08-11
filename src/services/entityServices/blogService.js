@@ -13,13 +13,13 @@ const getBlogById = async (id) => {
 
 const getAllBlogs = async ({ search }) => {
   console.log("search", search);
-  const whereClause = {};
-
-  if (search) {
-    whereClause.title = {
-      [Op.substring]: search,
-    };
-  }
+  const whereClause = {
+    [Op.or]: [
+      { title: { [Op.substring]: search } },
+      { author: { [Op.substring]: search } },
+      { url: { [Op.substring]: search } },
+    ],
+  };
 
   const blogs = await Blog.findAll({
     include: {
