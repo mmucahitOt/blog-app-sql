@@ -16,9 +16,13 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/register", async (req, res) => {
-  const { username, name, _ } = req.body;
-  const result = await authController.register(username, name);
-  res.json(result);
+  try {
+    const { username, name, _ } = req.body;
+    const result = await authController.register(username, name);
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;
