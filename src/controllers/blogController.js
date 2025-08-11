@@ -1,8 +1,8 @@
 const { RequestErrorBuilder } = require("../common/RequestError.js");
 const { blogService } = require("../services/entityServices");
 
-const getBlogs = async () => {
-  const blogs = await blogService.getAllBlogs();
+const getBlogs = async ({ search }) => {
+  const blogs = await blogService.getAllBlogs({ search });
   if (!blogs) {
     throw new RequestErrorBuilder()
       .addMessage("No blogs found")

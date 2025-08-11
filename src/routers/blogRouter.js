@@ -5,12 +5,13 @@ const { RequestErrorBuilder } = require("../common/RequestError.js");
 const blogRouter = express.Router();
 
 blogRouter.get("/:id", findBlogByIdMiddleware, async (req, res) => {
-  res.json(req.blog.toJSON());
+  res.json(req.blog);
 });
 
 blogRouter.get("/", async (req, res, next) => {
   try {
-    const blogs = await blogController.getBlogs();
+    const { search } = req.query;
+    const blogs = await blogController.getBlogs({ search });
     res.json(blogs);
   } catch (error) {
     next(error);
@@ -25,7 +26,7 @@ blogRouter.post("/", async (req, res, next) => {
       userId,
       updateInput: { author, title, url, likes },
     });
-    res.json(blog.toJSON());
+    res.json(blog);
   } catch (error) {
     next(error);
   }
@@ -42,7 +43,7 @@ blogRouter.put("/:id", findBlogByIdMiddleware, async (req, res, next) => {
       url,
       likes,
     });
-    res.json(blog.toJSON());
+    res.json(blog);
   } catch (error) {
     next(error);
   }

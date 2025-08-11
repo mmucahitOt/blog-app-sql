@@ -1,4 +1,5 @@
 const { Blog, User } = require("../../models");
+const { Op } = require("sequelize");
 
 const getBlogById = async (id) => {
   const blog = await Blog.findByPk(id, {
@@ -10,12 +11,22 @@ const getBlogById = async (id) => {
   return blog.toJSON();
 };
 
-const getAllBlogs = async () => {
+const getAllBlogs = async ({ search }) => {
+  console.log("search", search);
+  const whereClause = {};
+
+  if (search) {
+    whereClause.title = {
+      [Op.substring]: search,
+    };
+  }
+
   const blogs = await Blog.findAll({
     include: {
       model: User,
       attributes: ["username", "name"],
     },
+    where: whereClause,
   });
   return blogs.map((blog) => blog.toJSON());
 };

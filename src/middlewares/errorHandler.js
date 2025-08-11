@@ -1,4 +1,4 @@
-const { ValidationError, UniqueConstraintError } = require("sequelize");
+const { ValidationError } = require("sequelize");
 const { RequestErrorBuilder, RequestError } = require("../common/RequestError");
 
 const errorHandler = (error, req, res, next) => {
