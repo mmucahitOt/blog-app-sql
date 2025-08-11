@@ -1,18 +1,18 @@
-const User = require("../models/User.js");
+const { User } = require("../../models");
 
 const getUserById = async (id) => {
   const user = await User.findByPk(id);
-  return user;
+  return user.toJSON();
 };
 
 const getUserByUsername = async (username) => {
   const user = await User.findOne({ where: { username } });
-  return user;
+  return user.toJSON();
 };
 
 const getAllUsers = async () => {
   const users = await User.findAll();
-  return users;
+  return users.map((user) => user.toJSON());
 };
 
 const createUser = async ({ username, name }) => {
@@ -21,14 +21,14 @@ const createUser = async ({ username, name }) => {
     name,
   });
   console.log("Created user:", user.toJSON());
-  return user;
+  return user.toJSON();
 };
 
 const updateUserByUsername = async ({ username, updateUserData }) => {
   const user = await User.findOne({ where: { username } });
   Object.assign(user, updateUserData);
   await user.save();
-  return user;
+  return user.toJSON();
 };
 
 const deleteUser = async (id) => {

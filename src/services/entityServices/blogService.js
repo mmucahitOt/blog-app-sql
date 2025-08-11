@@ -1,4 +1,4 @@
-const Blog = require("../models/Blog.js");
+const { Blog } = require("../../models");
 
 const getBlogById = async (id) => {
   const blog = await Blog.findByPk(id);
@@ -6,16 +6,20 @@ const getBlogById = async (id) => {
 };
 
 const getAllBlogs = async () => {
-  const blogs = await Blog.findAll();
+  const blogs = Blog.findAll();
   return blogs;
 };
 
-const createBlog = async ({ author, title, url, likes }) => {
+const createBlog = async ({
+  userId,
+  updateInput: { author, title, url, likes = 0 },
+}) => {
   const blog = await Blog.create({
+    userId,
     author,
     title,
     url,
-    likes,
+    likes: likes || 0, // Ensure likes is always a number, default to 0 if undefined/null
   });
   console.log("Created blog:", blog.toJSON());
   return blog;

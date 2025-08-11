@@ -17,9 +17,13 @@ blogRouter.get("/", async (req, res, next) => {
 });
 
 blogRouter.post("/", async (req, res, next) => {
+  const { id: userId } = req.user;
   const { author, title, url, likes } = req.body;
   try {
-    const blog = await blogController.createBlog({ author, title, url, likes });
+    const blog = await blogController.createBlog({
+      userId,
+      updateInput: { author, title, url, likes },
+    });
     res.json(blog.toJSON());
   } catch (error) {
     next(error);

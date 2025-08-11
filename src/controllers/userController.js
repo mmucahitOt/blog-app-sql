@@ -1,5 +1,5 @@
 const { RequestErrorBuilder } = require("../common/RequestError.js");
-const { userService } = require("../services/index.js");
+const { userService } = require("../services/entityServices");
 
 const getUsers = async () => {
   const users = await userService.getAllUsers();

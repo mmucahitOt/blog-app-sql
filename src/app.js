@@ -1,5 +1,5 @@
 const express = require("express");
-const { requestLogger } = require("./utils/logger.js");
+const { requestLogger } = require("./middlewares/logger.js");
 const errorHandler = require("./middlewares/errorHandler.js");
 const apiRouter = require("./routers/index.js");
 

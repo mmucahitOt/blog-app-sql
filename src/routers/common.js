@@ -1,5 +1,5 @@
 const { RequestErrorBuilder } = require("../common/RequestError");
-const { blogService, userService } = require("../services");
+const { blogService, userService } = require("../services/entityServices");
 
 const findBlogByIdMiddleware = async (req, res, next) => {
   const blog = await blogService.getBlogById(req.params.id);

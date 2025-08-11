@@ -1,5 +1,5 @@
 const { RequestErrorBuilder } = require("../common/RequestError.js");
-const { blogService } = require("../services/index.js");
+const { blogService } = require("../services/entityServices");
 
 const getBlogs = async () => {
   const blogs = await blogService.getAllBlogs();
@@ -12,8 +12,15 @@ const getBlogs = async () => {
   return blogs;
 };
 
-const createBlog = async (blog) => {
-  const newBlog = await blogService.createBlog(blog);
+const createBlog = async ({
+  userId,
+  updateInput: { author, title, url, likes },
+}) => {
+  console.log("userId", userId);
+  const newBlog = await blogService.createBlog({
+    userId,
+    updateInput: { author, title, url, likes },
+  });
   if (!newBlog) {
     throw new RequestErrorBuilder()
       .addMessage("Failed to create blog")
