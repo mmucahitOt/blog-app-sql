@@ -2,6 +2,7 @@ const { ValidationError, UniqueConstraintError } = require("sequelize");
 const { RequestErrorBuilder, RequestError } = require("../common/RequestError");
 
 const errorHandler = (error, req, res, next) => {
+  console.log("error", JSON.stringify(error, null, 2));
   if (error instanceof ValidationError) {
     const requestError = new RequestErrorBuilder()
       .fromSequelizeError(error)

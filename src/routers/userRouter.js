@@ -1,7 +1,6 @@
 const express = require("express");
 const { userController } = require("../controllers/index.js");
 const {
-  findUserByIdMiddleware,
   findUserByUsernameMiddleware,
 } = require("./common.js");
 const userRouter = express.Router();

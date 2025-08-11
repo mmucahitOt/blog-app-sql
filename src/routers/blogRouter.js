@@ -1,6 +1,7 @@
 const express = require("express");
 const { blogController } = require("../controllers/index.js");
 const { findBlogByIdMiddleware } = require("./common.js");
+const { RequestErrorBuilder } = require("../common/RequestError.js");
 const blogRouter = express.Router();
 
 blogRouter.get("/:id", findBlogByIdMiddleware, async (req, res) => {
@@ -49,7 +50,17 @@ blogRouter.put("/:id", findBlogByIdMiddleware, async (req, res, next) => {
 
 blogRouter.delete("/:id", findBlogByIdMiddleware, async (req, res, next) => {
   try {
-    await blogController.deleteBlog(req.blog.id);
+    const { id: userId } = req.user;
+    const blog = req.blog;
+    console.log("blog", blog);
+    console.log("userId", userId);
+    if (blog.userId !== userId) {
+      throw new RequestErrorBuilder()
+        .addMessage("Unauthorized")
+        .setCode(401)
+        .build();
+    }
+    await blogController.deleteBlog(blog.id);
     res.json("Blog deleted successfully");
   } catch (error) {
     next(error);
