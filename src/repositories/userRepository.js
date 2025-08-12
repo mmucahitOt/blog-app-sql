@@ -9,7 +9,7 @@ const getUserById = async (id) => {
     include: [
       {
         model: Blog,
-        as: "reading_list",
+        as: "readings",
         through: {
           attributes: ["read"],
         },
@@ -58,7 +58,7 @@ const getAllUsers = async () => {
       },
       {
         model: Blog,
-        through: { attributes: [], as: "reading_list" },
+        through: { attributes: [], as: "readings" },
       },
     ],
   });

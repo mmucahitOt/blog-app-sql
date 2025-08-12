@@ -19,6 +19,20 @@ const addBlogToReadingList = async ({ userId, blogId }) => {
   }
 };
 
+const updateReadBlog = async ({ userId, blogId, read }) => {
+  try {
+    const readBlog = await readBlogRepository.updateReadBlog({
+      userId,
+      blogId,
+      read,
+    });
+    return readBlog;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   addBlogToReadingList,
+  updateReadBlog,
 };

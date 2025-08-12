@@ -16,7 +16,7 @@ User.belongsToMany(Blog, {
   through: ReadBlog,
   foreignKey: "userId",
   otherKey: "blogId",
-  as: "reading_list",
+  as: "readings",
 });
 
 Blog.belongsToMany(User, {
