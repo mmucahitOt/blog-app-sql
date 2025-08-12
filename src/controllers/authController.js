@@ -1,3 +1,4 @@
+const { RequestErrorBuilder } = require("../common/RequestError");
 const { userRepository } = require("../repositories");
 const { jwtService } = require("../services/jwtService");
 
@@ -24,7 +25,7 @@ const login = async (username, password) => {
     });
     return { token, user };
   } catch (error) {
-    next(error);
+    throw error;
   }
 };
 
@@ -33,7 +34,7 @@ const register = async (username, name) => {
     const user = await userRepository.createUser({ username, name });
     return user;
   } catch (error) {
-    next(error);
+    throw error;
   }
 };
 

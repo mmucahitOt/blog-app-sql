@@ -2,12 +2,12 @@ const { User, Blog } = require("../models");
 
 const getUserById = async (id) => {
   const user = await User.findByPk(id);
-  return user.toJSON();
+  return user ? user.toJSON() : null;
 };
 
 const getUserByUsername = async (username) => {
   const user = await User.findOne({ where: { username } });
-  return user.toJSON();
+  return user ? user.toJSON() : null;
 };
 
 const getAllUsers = async () => {
@@ -17,7 +17,7 @@ const getAllUsers = async () => {
       attributes: ["id", "title", "url", "likes"],
     },
   });
-  return users.map((user) => user.toJSON());
+  return users ? users.map((user) => user.toJSON()) : [];
 };
 
 const createUser = async ({ username, name }) => {
@@ -26,14 +26,14 @@ const createUser = async ({ username, name }) => {
     name,
   });
   console.log("Created user:", user.toJSON());
-  return user.toJSON();
+  return user ? user.toJSON() : null;
 };
 
 const updateUserByUsername = async ({ username, updateUserData }) => {
   const user = await User.findOne({ where: { username } });
   Object.assign(user, updateUserData);
   await user.save();
-  return user.toJSON();
+  return user ? user.toJSON() : null;
 };
 
 const deleteUser = async (id) => {

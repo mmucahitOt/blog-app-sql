@@ -8,7 +8,7 @@ const getBlogById = async (id) => {
       attributes: ["username", "name"],
     },
   });
-  return blog.toJSON();
+  return blog ? blog.toJSON() : null;
 };
 
 const getAllBlogs = async ({ search }) => {
@@ -27,10 +27,10 @@ const getAllBlogs = async ({ search }) => {
       model: User,
       attributes: ["username", "name"],
     },
-    where: whereClause,
+    where: search ? whereClause : {},
     order: orderClause,
   });
-  return blogs.map((blog) => blog.toJSON());
+  return blogs ? blogs.map((blog) => blog.toJSON()) : [];
 };
 
 const createBlog = async ({
@@ -45,7 +45,7 @@ const createBlog = async ({
     likes: likes || 0, // Ensure likes is always a number, default to 0 if undefined/null
   });
   console.log("Created blog:", blog.toJSON());
-  return blog.toJSON();
+  return blog ? blog.toJSON() : null;
 };
 
 const updateBlog = async (id, updateBlogData) => {
@@ -53,7 +53,7 @@ const updateBlog = async (id, updateBlogData) => {
 
   Object.assign(blog, updateBlogData);
   await blog.save();
-  return blog.toJSON();
+  return blog ? blog.toJSON() : null;
 };
 
 const deleteBlog = async (id) => {

@@ -1,16 +1,12 @@
-require("../../src/utils/db");
-const { Blog, User } = require("../../src/models");
+const { sequelize } = require("../../src/utils/db");
 
 const resetDb = async () => {
   try {
-    await Blog.drop({
-      cascade: true,
-      force: true,
-    });
-    await User.drop({
-      cascade: true,
-      force: true,
-    });
+    await sequelize.authenticate();
+    await sequelize.query("DROP TABLE IF EXISTS migrations");
+    await sequelize.query("DROP TABLE IF EXISTS blogs");
+    await sequelize.query("DROP TABLE IF EXISTS users");
+    console.log("Database reset complete");
   } catch (error) {
     console.error("Database reset error:", error);
     throw error;

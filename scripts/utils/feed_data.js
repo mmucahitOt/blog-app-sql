@@ -1,7 +1,7 @@
 const { userRepository } = require("../../src/repositories/index.js");
 const { blogRepository } = require("../../src/repositories/index.js");
 require("../../src/utils/db");
-const { resetDb } = require("./db_reset");
+const { resetDb } = require("./db_empty.js");
 
 const users = [
   { username: "admin@example.com", name: "Admin" },

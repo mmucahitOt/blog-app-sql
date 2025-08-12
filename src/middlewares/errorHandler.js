@@ -13,7 +13,7 @@ const errorHandler = (error, req, res, next) => {
     return res.status(error.code).json({ error: error.messages });
   }
   console.log(JSON.stringify(error, null, 2));
-  res.status(500).json({ error: "Internal server error" });
+  res.status(500).json({ error: "Internal server error:" });
 };
 
 module.exports = errorHandler;

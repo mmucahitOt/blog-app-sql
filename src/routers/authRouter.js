@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { authController } = require("../controllers/index.js");
 
-router.post("/login", async (req, res) => {
+router.post("/login", async (req, res, next) => {
   try {
     const { username, password } = req.body;
     const result = await authController.login(username, password);

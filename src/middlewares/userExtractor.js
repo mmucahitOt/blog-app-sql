@@ -4,6 +4,7 @@ const { userRepository } = require("../repositories");
 const userExtractor = async (req, res, next) => {
   try {
     const token = req.token;
+    console.log("token", token);
     const { username } = jwtService.verifyToken(token);
     const user = await userRepository.getUserByUsername(username);
     if (!user) {

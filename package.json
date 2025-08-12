@@ -8,7 +8,9 @@
     "db:up": "bash scripts/db_up.bash",
     "db:down": "bash scripts/db_down.bash",
     "db:reset": "node scripts/db_reset_script.js",
-    "db:feed": "node scripts/feed_data_script.js"
+    "db:feed": "node scripts/feed_data_script.js",
+    "db:empty": "node scripts/db_empty_script.js",
+    "migration:down": "node src/utils/rollBack.js"
   },
   "dependencies": {
     "dotenv": "^17.2.1",
