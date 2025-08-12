@@ -1,5 +1,6 @@
 const { jwtService } = require("../services/jwtService");
 const { userRepository } = require("../repositories");
+const { RequestErrorBuilder } = require("../common/RequestError");
 
 const userExtractor = async (req, res, next) => {
   try {

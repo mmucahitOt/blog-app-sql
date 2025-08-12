@@ -4,14 +4,32 @@ const { User, Blog } = require("../models");
 // Queries
 /////////////////////
 
-const getUserById = async (id) => {
+const getUserById = async ({ id, read }) => {
+  let readQuery = {};
+  if (read === "true") {
+    readQuery = {
+      where: { read: true },
+    };
+  }
+  if (read === "false") {
+    readQuery = {
+      where: { read: false },
+    };
+  }
   const user = await User.findByPk(id, {
     include: [
+      /*{
+        model: Blog,
+        attributes: {
+          include: ["id", "title", "author"],
+        },
+      },*/
       {
         model: Blog,
         as: "readings",
         through: {
           attributes: ["read"],
+          ...readQuery,
         },
       },
     ],
@@ -49,18 +67,14 @@ const getUserByUsername = async (username) => {
 const getAllUsers = async () => {
   const users = await User.findAll({
     attributes: { exclude: [""] },
-    include: [
+    /*include: [
       {
         model: Blog,
         attribute: {
-          exclude: ["user_id"],
+          include: ["id", "title", "author"],
         },
       },
-      {
-        model: Blog,
-        through: { attributes: [], as: "readings" },
-      },
-    ],
+    ],*/
   });
   return users ? users.map((user) => user.toJSON()) : [];
 };

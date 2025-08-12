@@ -1,9 +1,9 @@
 const { RequestErrorBuilder } = require("../common/RequestError.js");
 const { userRepository } = require("../repositories");
 
-const getUserById = async (id) => {
+const getUserById = async ({ id, read }) => {
   console.log("userid", id);
-  const user = await userRepository.getUserById(id);
+  const user = await userRepository.getUserById({ id, read });
   if (!user) {
     throw new RequestErrorBuilder()
       .addMessage("User not found")
