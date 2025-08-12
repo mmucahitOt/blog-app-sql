@@ -31,6 +31,10 @@ const connectToDatabase = async () => {
   try {
     await sequelize.authenticate();
     await runMigrations();
+
+    // Initialize models after database connection
+    require("../models");
+
     console.log("Connected to the database");
   } catch (error) {
     console.error("Unable to connect to the database:", error);

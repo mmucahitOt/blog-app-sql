@@ -1,13 +1,16 @@
 const express = require("express");
 const { userController } = require("../controllers/index.js");
-const {
-  findUserByUsernameMiddleware,
-} = require("./common.js");
+const { findUserByUsernameMiddleware } = require("./common.js");
 const userRouter = express.Router();
 
-/*userRouter.get("/:id", findUserByIdMiddleware, async (req, res) => {
-  res.json(req.user.toJSON());
-});*/
+userRouter.get("/:id", async (req, res, next) => {
+  try {
+    const user = await userController.getUserById(req.params.id);
+    res.json(user);
+  } catch (error) {
+    next(error);
+  }
+});
 
 userRouter.get("/", async (req, res, next) => {
   try {
