@@ -1,5 +1,5 @@
-const { userService } = require("../../src/services/entityServices/index.js");
-const { blogService } = require("../../src/services/entityServices/index.js");
+const { userRepository } = require("../../src/repositories/index.js");
+const { blogRepository } = require("../../src/repositories/index.js");
 require("../../src/utils/db");
 const { resetDb } = require("./db_reset");
 
@@ -36,27 +36,27 @@ const blogs = [
 ];
 
 const feedData = async () => {
-  const admin = await userService.createUser(users[0]);
-  await userService.createUser(users[1]);
-  await blogService.createBlog({
+  const admin = await userRepository.createUser(users[0]);
+  await userRepository.createUser(users[1]);
+  await blogRepository.createBlog({
     userId: admin.id,
     updateInput: {
       ...blogs[0],
     },
   });
-  await blogService.createBlog({
+  await blogRepository.createBlog({
     userId: admin.id,
     updateInput: {
       ...blogs[1],
     },
   });
-  await blogService.createBlog({
+  await blogRepository.createBlog({
     userId: admin.id,
     updateInput: {
       ...blogs[2],
     },
   });
-  await blogService.createBlog({
+  await blogRepository.createBlog({
     userId: admin.id,
     updateInput: {
       ...blogs[3],

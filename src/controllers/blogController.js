@@ -1,8 +1,8 @@
 const { RequestErrorBuilder } = require("../common/RequestError.js");
-const { blogService } = require("../services/entityServices");
+const { blogRepository } = require("../repositories");
 
 const getBlogs = async ({ search }) => {
-  const blogs = await blogService.getAllBlogs({ search });
+  const blogs = await blogRepository.getAllBlogs({ search });
   if (!blogs) {
     throw new RequestErrorBuilder()
       .addMessage("No blogs found")
@@ -17,7 +17,7 @@ const createBlog = async ({
   updateInput: { author, title, url, likes },
 }) => {
   console.log("userId", userId);
-  const newBlog = await blogService.createBlog({
+  const newBlog = await blogRepository.createBlog({
     userId,
     updateInput: { author, title, url, likes },
   });
@@ -37,7 +37,7 @@ const updateBlog = async ({ id, author, title, url, likes }) => {
   if (url) updateBlogData.url = url;
   if (likes) updateBlogData.likes = likes;
 
-  const updatedBlog = await blogService.updateBlog(id, updateBlogData);
+  const updatedBlog = await blogRepository.updateBlog(id, updateBlogData);
   if (!updatedBlog) {
     throw new RequestErrorBuilder()
       .addMessage("Failed to update blog")
@@ -48,7 +48,7 @@ const updateBlog = async ({ id, author, title, url, likes }) => {
 };
 
 const deleteBlog = async (id) => {
-  const deletedBlog = await blogService.deleteBlog(id);
+  const deletedBlog = await blogRepository.deleteBlog(id);
   if (!deletedBlog) {
     throw new RequestErrorBuilder()
       .addMessage("Failed to delete blog")

@@ -1,8 +1,8 @@
 const { RequestErrorBuilder } = require("../common/RequestError.js");
-const { authorService } = require("../services/entityServices/index.js");
+const { authorRepository } = require("../repositories/index.js");
 
 const getAuthors = async ({ search }) => {
-  const authors = await authorService.getAllAuthors({ search });
+  const authors = await authorRepository.getAllAuthors({ search });
   if (!authors) {
     throw new RequestErrorBuilder()
       .addMessage("No authors found")

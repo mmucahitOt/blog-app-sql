@@ -1,11 +1,11 @@
 const { jwtService } = require("../services/jwtService");
-const { userService } = require("../services/entityServices");
+const { userRepository } = require("../repositories");
 
 const userExtractor = async (req, res, next) => {
   try {
     const token = req.token;
     const { username } = jwtService.verifyToken(token);
-    const user = await userService.getUserByUsername(username);
+    const user = await userRepository.getUserByUsername(username);
     if (!user) {
       throw new RequestErrorBuilder()
         .addMessage("Unauthorized")

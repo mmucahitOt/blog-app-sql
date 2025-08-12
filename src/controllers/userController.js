@@ -1,8 +1,8 @@
 const { RequestErrorBuilder } = require("../common/RequestError.js");
-const { userService } = require("../services/entityServices");
+const { userRepository } = require("../repositories");
 
 const getUsers = async () => {
-  const users = await userService.getAllUsers();
+  const users = await userRepository.getAllUsers();
   if (!users) {
     throw new RequestErrorBuilder()
       .addMessage("No users found")
@@ -14,7 +14,7 @@ const getUsers = async () => {
 
 const createUser = async (user) => {
   try {
-    const newUser = await userService.createUser(user);
+    const newUser = await userRepository.createUser(user);
     if (!newUser) {
       throw new RequestErrorBuilder()
         .addMessage("Failed to create user")
@@ -32,7 +32,7 @@ const updateUserByUsername = async ({ username, newUsername, name }) => {
   if (newUsername) updateUserData.username = newUsername;
   if (name) updateUserData.name = name;
 
-  const updatedUser = await userService.updateUser({
+  const updatedUser = await userRepository.updateUser({
     username,
     updateUserData,
   });
@@ -46,7 +46,7 @@ const updateUserByUsername = async ({ username, newUsername, name }) => {
 };
 
 const deleteUser = async (id) => {
-  const deletedUser = await userService.deleteUser(id);
+  const deletedUser = await userRepository.deleteUser(id);
   if (!deletedUser) {
     throw new RequestErrorBuilder()
       .addMessage("Failed to delete user")

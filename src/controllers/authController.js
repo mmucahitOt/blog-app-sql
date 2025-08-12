@@ -1,9 +1,9 @@
-const { userService } = require("../services/entityServices");
+const { userRepository } = require("../repositories");
 const { jwtService } = require("../services/jwtService");
 
 const login = async (username, password) => {
   try {
-    const user = await userService.getUserByUsername(username);
+    const user = await userRepository.getUserByUsername(username);
     if (!user) {
       throw new RequestErrorBuilder()
         .addMessage("User not found")
@@ -30,7 +30,7 @@ const login = async (username, password) => {
 
 const register = async (username, name) => {
   try {
-    const user = await userService.createUser({ username, name });
+    const user = await userRepository.createUser({ username, name });
     return user;
   } catch (error) {
     next(error);

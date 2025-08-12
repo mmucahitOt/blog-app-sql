@@ -1,5 +1,5 @@
 const express = require("express");
-const { getAllAuthors } = require("../services/entityServices/authorService");
+const { getAllAuthors } = require("../repositories/authorRepository");
 
 const router = express.Router();
 

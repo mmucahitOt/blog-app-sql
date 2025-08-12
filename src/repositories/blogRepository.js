@@ -1,4 +1,4 @@
-const { Blog, User } = require("../../models");
+const { Blog, User } = require("../models");
 const { Op } = require("sequelize");
 
 const getBlogById = async (id) => {

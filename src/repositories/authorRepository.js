@@ -1,5 +1,5 @@
-const { Blog } = require("../../models/index.js");
-const { sequelize } = require("../../utils/db");
+const { Blog } = require("../models/index.js");
+const { sequelize } = require("../utils/db.js");
 const { Op } = require("sequelize");
 
 const getAllAuthors = async ({ search }) => {

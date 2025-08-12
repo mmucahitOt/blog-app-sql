@@ -1,8 +1,8 @@
 const { RequestErrorBuilder } = require("../common/RequestError");
-const { blogService, userService } = require("../services/entityServices");
+const { blogRepository, userRepository } = require("../repositories");
 
 const findBlogByIdMiddleware = async (req, res, next) => {
-  const blog = await blogService.getBlogById(req.params.id);
+  const blog = await blogRepository.getBlogById(req.params.id);
   if (!blog) {
     return next(
       new RequestErrorBuilder()
@@ -16,7 +16,7 @@ const findBlogByIdMiddleware = async (req, res, next) => {
 };
 
 const findUserByIdMiddleware = async (req, res, next) => {
-  const user = await userService.getUserById(req.params.id);
+  const user = await userRepository.getUserById(req.params.id);
   if (!user) {
     return next(
       new RequestErrorBuilder()
@@ -30,7 +30,7 @@ const findUserByIdMiddleware = async (req, res, next) => {
 };
 
 const findUserByUsernameMiddleware = async (req, res, next) => {
-  const user = await userService.getUserByUsername(req.params.username);
+  const user = await userRepository.getUserByUsername(req.params.username);
   if (!user) {
     return next(
       new RequestErrorBuilder()
