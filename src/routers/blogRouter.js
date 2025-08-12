@@ -20,11 +20,11 @@ blogRouter.get("/", async (req, res, next) => {
 
 blogRouter.post("/", async (req, res, next) => {
   const { id: userId } = req.user;
-  const { author, title, url, likes } = req.body;
+  const { author, title, url, likes, year } = req.body;
   try {
     const blog = await blogController.createBlog({
       userId,
-      updateInput: { author, title, url, likes },
+      updateInput: { author, title, url, likes, year },
     });
     res.json(blog);
   } catch (error) {

@@ -35,16 +35,16 @@ const getAllBlogs = async ({ search }) => {
 
 const createBlog = async ({
   userId,
-  updateInput: { author, title, url, likes = 0 },
+  updateInput: { author, title, url, likes = 0, year },
 }) => {
   const blog = await Blog.create({
     userId,
     author,
     title,
     url,
-    likes: likes || 0, // Ensure likes is always a number, default to 0 if undefined/null
+    likes: likes || 0,
+    year: year || new Date().getFullYear(),
   });
-  console.log("Created blog:", blog.toJSON());
   return blog ? blog.toJSON() : null;
 };
 

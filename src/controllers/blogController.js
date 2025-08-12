@@ -14,12 +14,12 @@ const getBlogs = async ({ search }) => {
 
 const createBlog = async ({
   userId,
-  updateInput: { author, title, url, likes },
+  updateInput: { author, title, url, likes, year },
 }) => {
   console.log("userId", userId);
   const newBlog = await blogRepository.createBlog({
     userId,
-    updateInput: { author, title, url, likes },
+    updateInput: { author, title, url, likes, year },
   });
   if (!newBlog) {
     throw new RequestErrorBuilder()

@@ -14,24 +14,28 @@ const blogs = [
     author: "Test Author",
     url: "https://test.com",
     likes: 0,
+    year: 2025,
   },
   {
     title: "Test Blog 2",
     author: "Test Author 2",
     url: "https://test.com/2",
     likes: 0,
+    year: 2025,
   },
   {
     title: "Test Blog 3",
     author: "Test Author 3",
     url: "https://test.com/3",
     likes: 0,
+    year: 2025,
   },
   {
     title: "Test Blog 4",
     author: "Test Author 4",
     url: "https://test.com/4",
     likes: 0,
+    year: 2025,
   },
 ];
 
