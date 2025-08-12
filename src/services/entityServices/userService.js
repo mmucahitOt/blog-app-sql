@@ -43,6 +43,11 @@ const deleteUser = async (id) => {
   return true;
 };
 
+const deleteAllUsers = async () => {
+  await User.destroy({ where: {}, force: true });
+  return true;
+};
+
 module.exports = {
   getAllUsers,
   createUser,
@@ -50,4 +55,5 @@ module.exports = {
   getUserByUsername,
   updateUser: updateUserByUsername,
   deleteUser,
+  deleteAllUsers,
 };

@@ -63,10 +63,16 @@ const deleteBlog = async (id) => {
   return true;
 };
 
+const deleteAllBlogs = async () => {
+  await Blog.destroy({ where: {}, force: true });
+  return true;
+};
+
 module.exports = {
   getAllBlogs,
   createBlog,
   getBlogById,
   updateBlog,
   deleteBlog,
+  deleteAllBlogs,
 };
