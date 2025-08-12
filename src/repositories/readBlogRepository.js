@@ -1,3 +1,4 @@
+const { RequestErrorBuilder } = require("../common/RequestError.js");
 const { ReadBlog } = require("../models/index.js");
 
 const addBlogToReadingList = async ({ userId, blogId }) => {
@@ -16,6 +17,12 @@ const updateReadBlog = async ({ userId, blogId, read }) => {
   });
   if (!readBlog) {
     return null;
+  }
+  if (readBlog.user_id === userId && readBlog.blog_id === blogId) {
+    return new RequestErrorBuilder()
+      .setCode(400)
+      .setMessage("Cannot update read blog that you do not own")
+      .build();
   }
   readBlog.read = read;
   await readBlog.save();
