@@ -9,7 +9,6 @@ const tokenExtractor = (req, res, next) => {
       .setCode(401)
       .build();
 
-    console.log("tokenExtractor", JSON.stringify(error, null, 2));
     return next(error);
   }
   const token = authorizationHeader.replace("Bearer ", "");

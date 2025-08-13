@@ -8,6 +8,12 @@ const initApp = async () => {
 
   app.use(express.json());
 
+  app.get("/health", (req, res) => {
+    res.json({
+      status: "ok",
+    });
+  });
+
   app.use(requestLogger);
 
   app.use("/api", apiRouter);

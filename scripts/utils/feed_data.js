@@ -1,11 +1,10 @@
 const { userRepository } = require("../../src/repositories/index.js");
 const { blogRepository } = require("../../src/repositories/index.js");
 require("../../src/utils/db");
-const { resetDb } = require("./db_empty.js");
 
 const users = [
-  { username: "admin@example.com", name: "Admin" },
-  { username: "user@example.com", name: "User" },
+  { username: "admin@example.com", name: "Admin", disabled: false },
+  { username: "user@example.com", name: "User", disabled: false },
 ];
 
 const blogs = [

@@ -6,12 +6,12 @@ const authRouter = require("./authRouter");
 const authorRouter = require("./authorRouter");
 const readBlogRouter = require("./readBlogRouter");
 const { tokenExtractor } = require("../middlewares/tokenExtractor");
-const { userExtractor } = require("../middlewares/userExtractor");
+const { authenticationMiddleware } = require("../middlewares/authenticationMiddleware");
 
 apiRouter.use("/auth", authRouter);
-apiRouter.use("/users", tokenExtractor, userExtractor, userRouter);
-apiRouter.use("/blogs", tokenExtractor, userExtractor, blogRouter);
-apiRouter.use("/authors", tokenExtractor, userExtractor, authorRouter);
-apiRouter.use("/readinglists", tokenExtractor, userExtractor, readBlogRouter);
+apiRouter.use("/users", tokenExtractor, authenticationMiddleware, userRouter);
+apiRouter.use("/blogs", tokenExtractor, authenticationMiddleware, blogRouter);
+apiRouter.use("/authors", tokenExtractor, authenticationMiddleware, authorRouter);
+apiRouter.use("/readinglists", tokenExtractor, authenticationMiddleware, readBlogRouter);
 
 module.exports = apiRouter;

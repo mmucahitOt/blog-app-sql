@@ -1,6 +1,7 @@
 const User = require("./User");
 const Blog = require("./Blog");
 const ReadBlog = require("./ReadBlog");
+const Session = require("./Session");
 
 console.log("Models loaded:", {
   User: !!User,
@@ -8,6 +9,9 @@ console.log("Models loaded:", {
   ReadBlog: !!ReadBlog,
   ReadBlogTableName: ReadBlog?.getTableName?.(),
 });
+
+User.hasMany(Session, { foreignKey: "userId" });
+Session.belongsTo(User, { foreignKey: "userId" });
 
 User.hasMany(Blog, { foreignKey: "userId" });
 Blog.belongsTo(User, { foreignKey: "userId" });
@@ -26,4 +30,4 @@ Blog.belongsToMany(User, {
   as: "read_by_users",
 });
 
-module.exports = { Blog, User, ReadBlog };
+module.exports = { Blog, User, ReadBlog, Session };

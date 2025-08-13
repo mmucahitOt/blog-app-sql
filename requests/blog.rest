@@ -10,7 +10,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkb
 
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluQGV4YW1wbGUuY29tIiwicGFzc3dvcmQiOiJzZWNyZXQiLCJpYXQiOjE3NTUwMDMxMzgsImV4cCI6MTc1NTM1OTUzOH0.P_KNWv1CMFDVAjiU24QlCQzAJkXLZRBuEw5cHtG0bos
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluQGV4YW1wbGUuY29tIiwicGFzc3dvcmQiOiJzZWNyZXQiLCJpYXQiOjE3NTUwOTk2MTAsImV4cCI6MTc1NTQ1NjAxMH0.qHW-jZIoiR1Dnpk33f9g3N0B7fsPA06-x4i8T_mOBaE
 
 {
   "author": "John Doe3",

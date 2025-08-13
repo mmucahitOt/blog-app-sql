@@ -2,7 +2,7 @@ POST http://localhost:3001/api/auth/login
 Content-Type: application/json
 
 {
-  "username": "admin@example.com",
+  "username": "user@example.com",
   "password": "secret"
 }
 
@@ -14,4 +14,33 @@ Content-Type: application/json
 {
   "username": "test2@test2.com",
   "name": "Test2 User"
+}
+
+###
+
+DELETE http://localhost:3001/api/auth/logout
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluQGV4YW1wbGUuY29tIiwicGFzc3dvcmQiOiJzZWNyZXQiLCJpYXQiOjE3NTUwOTgyNDYsImV4cCI6MTc1NTQ1NDY0Nn0.WR-sVyJhG_RQJR9frLo_Uy8EPV77DryOMg8lNvtoNW8
+
+###
+
+GET http://localhost:3001/health
+
+###
+
+POST http://localhost:3001/api/auth/disable-user
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluQGV4YW1wbGUuY29tIiwicGFzc3dvcmQiOiJzZWNyZXQiLCJpYXQiOjE3NTUxMDAxODUsImV4cCI6MTc1NTQ1NjU4NX0.Gaf7nPZPOe2Mz-JXonAOv_8qT_wbxlBpICiVoqbV_K8
+
+{
+  "userId": 2
+}
+
+###
+
+POST http://localhost:3001/api/auth/enable-user
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluQGV4YW1wbGUuY29tIiwicGFzc3dvcmQiOiJzZWNyZXQiLCJpYXQiOjE3NTUxMDAxODUsImV4cCI6MTc1NTQ1NjU4NX0.Gaf7nPZPOe2Mz-JXonAOv_8qT_wbxlBpICiVoqbV_K8
+
+{
+  "userId": 2
 }

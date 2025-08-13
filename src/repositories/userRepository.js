@@ -111,6 +111,26 @@ const deleteAllUsers = async () => {
   return true;
 };
 
+const enableUserById = async (id) => {
+  const user = await User.findByPk(id);
+  user.disabled = false;
+  await user.save();
+  return user ? user.toJSON() : null;
+};
+
+const disableUserById = async ({ id, transaction }) => {
+  const user = await User.findByPk(id);
+  if (user && user.name === "Admin") {
+    throw new RequestErrorBuilder()
+      .addMessage("Cannot disable admin user")
+      .setCode(403)
+      .build();
+  }
+  user.disabled = true;
+  await user.save({ transaction });
+  return user ? user.toJSON() : null;
+};
+
 module.exports = {
   getAllUsers,
   createUser,
@@ -119,4 +139,6 @@ module.exports = {
   updateUser: updateUserByUsername,
   deleteUser,
   deleteAllUsers,
+  enableUserById,
+  disableUserById,
 };

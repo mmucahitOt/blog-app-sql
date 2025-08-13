@@ -10,13 +10,15 @@
     "db:reset": "node scripts/db_reset_script.js",
     "db:feed": "node scripts/feed_data_script.js",
     "db:empty": "node scripts/db_empty_script.js",
-    "migration:down": "node src/utils/rollBack.js"
+    "migration:down": "node src/utils/rollBack.js",
+    "disable-user": "node scripts/disable_user_script.js"
   },
   "dependencies": {
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.16.3",
+    "readline-sync": "^1.4.10",
     "sequelize": "^6.37.7",
     "umzug": "^3.8.2"
   },
